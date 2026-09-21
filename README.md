@@ -1,6 +1,6 @@
-# Para Karen Leici · Flores Amarillas
+# Para Roxana Perla · Flores Amarillas
 
-Un detalle de amistad para el 21 de septiembre, con diseño botánico en marfil, oliva y amarillo.
+Un detalle de amor para el 21 de septiembre, con diseño botánico en marfil, oliva y amarillo.
 
 ## Música (sin YouTube / sin anuncios)
 
