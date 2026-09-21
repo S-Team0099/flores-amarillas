@@ -12,10 +12,8 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#inicio" aria-label="Volver al inicio"><span class="brand-flower" aria-hidden="true"><img class="sunflower-photo sunflower-photo--sm" src="assets/girasol.jpg" alt=""></span> Un pequeño detalle</a>
-    <div class="topbar-actions"><span class="date">21 <span>/</span> SEPTIEMBRE</span><button class="music-toggle" id="music-toggle" type="button" aria-expanded="false" aria-controls="music-panel">la mejor parte</button></div>
-  </header>
+  <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false">la mejor parte</button>
+
   <main id="experiencia">
     <section class="welcome-screen screen" id="inicio" aria-labelledby="welcome-title">
       <span class="welcome-flower" aria-hidden="true"><img class="sunflower-photo sunflower-photo--hero" src="assets/girasol.jpg" alt=""></span>
@@ -24,6 +22,7 @@
       <a class="button" href="#flores">Descubrir mis flores <span aria-hidden="true">→</span></a>
       <p class="hero-caption">Hecho para alegrarte el día.</p>
     </section>
+
     <section class="hero screen" id="flores" aria-labelledby="title" hidden>
       <div class="hero-copy">
         <h1 id="title" tabindex="-1">Hay amistades<br>que hacen los días<br><em>más bonitos.</em></h1>
@@ -32,14 +31,26 @@
         <p class="hero-caption">Un detalle para celebrar nuestra amistad.</p>
       </div>
       <figure class="botanical">
-        <div class="art-frame art-frame--photo">
+        <div class="art-frame">
           <div class="art-number">N.º 21 <span>SEPTIEMBRE</span></div>
-          <img class="botanical-photo" src="assets/girasol.jpg" alt="Girasol real al atardecer">
+          <svg id="flowers" viewBox="0 0 560 640" role="img" aria-labelledby="flowers-title">
+            <title id="flowers-title">Ilustración botánica de flores amarillas con tallos y hojas</title>
+            <defs>
+              <linearGradient id="petal" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#f5dd80"/><stop offset=".55" stop-color="#dcb33e"/><stop offset="1" stop-color="#b88726"/>
+              </linearGradient>
+              <linearGradient id="leaf"><stop stop-color="#788568"/><stop offset="1" stop-color="#394b39"/></linearGradient>
+              <radialGradient id="heart"><stop stop-color="#7b6540"/><stop offset="1" stop-color="#443c29"/></radialGradient>
+            </defs>
+            <g id="botanical-stems"></g>
+            <g id="botanical-heads"></g>
+          </svg>
           <span class="art-label">Un poquito de alegría, en amarillo.</span>
         </div>
         <figcaption><span>FLORES QUE DICEN GRACIAS</span><span>por tu amistad.</span></figcaption>
       </figure>
     </section>
+
     <section class="envelope-screen screen" id="sobre" aria-labelledby="envelope-title" hidden>
       <p class="eyebrow">UNAS PALABRAS PARA TI</p>
       <h2 id="envelope-title" tabindex="-1">Los buenos detalles<br><em>se abren despacio.</em></h2>
@@ -51,22 +62,50 @@
       <p class="envelope-hint">Toca el sello para abrir tu carta</p>
       <a class="text-link" href="#flores">← Volver a las flores</a>
     </section>
+
     <section class="letter-section screen" id="carta" aria-labelledby="letter-title" hidden>
-      <div class="letter-aside"><p class="eyebrow">UNAS PALABRAS PARA TI</p><h2>Las cosas sencillas<br>también <em>alegran.</em></h2><p>Una conversación, una buena risa<br>o un detalle inesperado.</p><span class="aside-flower" aria-hidden="true"><img class="sunflower-photo sunflower-photo--md" src="assets/girasol.jpg" alt=""></span></div>
-      <article class="letter"><span class="letter-date">21 de septiembre</span><h3 id="letter-title" tabindex="-1">Karen,</h3><p>Hoy no podían faltar tus flores amarillas. Este es un pequeño detalle para desearte un bonito día y darte las gracias por tu amistad.</p><p>Gracias por las conversaciones, las risas y los buenos momentos compartidos. Qué bueno contar con una amiga como tú.</p><p>Ojalá esta nueva temporada venga con buenas noticias, nuevos planes y muchas cosas que te hagan feliz.</p><p class="letter-wish">¡Feliz día de las flores amarillas!</p><div class="signature"><span>Con aprecio,</span><span class="signature-mark" aria-hidden="true"><img class="sunflower-photo sunflower-photo--xs" src="assets/girasol.jpg" alt=""></span></div><a class="text-link letter-next" href="#final">Un último deseo →</a></article>
+      <div class="letter-aside">
+        <p class="eyebrow">UNAS PALABRAS PARA TI</p>
+        <h2>Las cosas sencillas<br>también <em>alegran.</em></h2>
+        <p>Una conversación, una buena risa<br>o un detalle inesperado.</p>
+        <span class="aside-flower" aria-hidden="true"><img class="sunflower-photo sunflower-photo--md" src="assets/girasol.jpg" alt=""></span>
+      </div>
+      <article class="letter">
+        <span class="letter-date">21 de septiembre</span>
+        <h3 id="letter-title" tabindex="-1">Karen,</h3>
+        <p>Hoy no podían faltar tus flores amarillas. Este es un pequeño detalle para desearte un bonito día y darte las gracias por tu amistad.</p>
+        <p>Gracias por las conversaciones, las risas y los buenos momentos compartidos. Qué bueno contar con una amiga como tú.</p>
+        <p>Ojalá esta nueva temporada venga con buenas noticias, nuevos planes y muchas cosas que te hagan feliz.</p>
+        <p class="letter-wish">¡Feliz día de las flores amarillas!</p>
+        <div class="signature">
+          <span>Con aprecio,</span>
+          <span class="signature-mark" aria-hidden="true"><img class="sunflower-photo sunflower-photo--xs" src="assets/girasol.jpg" alt=""></span>
+        </div>
+        <a class="text-link letter-next" href="#final">Un último deseo →</a>
+      </article>
     </section>
-    <section class="closing screen" id="final" aria-label="Un último deseo" tabindex="-1" hidden><p class="eyebrow">QUE NO FALTEN</p><p>Flores, buenos días<br>y <em>buenos amigos.</em></p><a href="#inicio">Volver a empezar <span aria-hidden="true">↺</span></a></section>
+
+    <section class="closing screen" id="final" aria-label="Un último deseo" tabindex="-1" hidden>
+      <p class="eyebrow">QUE NO FALTEN</p>
+      <p>Flores, buenos días<br>y <em>buenos amigos.</em></p>
+      <a href="#inicio">Volver a empezar <span aria-hidden="true">↺</span></a>
+    </section>
   </main>
-  <nav class="steps" aria-label="Pasos de la dedicatoria"><a href="#inicio" aria-label="1. Bienvenida" aria-current="step"></a><a href="#flores" aria-label="2. Flores"></a><a href="#sobre" aria-label="3. Sobre y carta"></a><a href="#final" aria-label="4. Despedida"></a></nav>
+
+  <nav class="steps" aria-label="Pasos de la dedicatoria">
+    <a href="#inicio" aria-label="1. Bienvenida" aria-current="step"></a>
+    <a href="#flores" aria-label="2. Flores"></a>
+    <a href="#sobre" aria-label="3. Sobre y carta"></a>
+    <a href="#final" aria-label="4. Despedida"></a>
+  </nav>
+
   <noscript><p class="noscript-message">Activa JavaScript para abrir las flores y la carta.</p></noscript>
+
   <footer>
     <span>desarrollado por <a class="credit" href="https://instagram.com/shuincho" target="_blank" rel="noopener noreferrer">@shuincho</a></span>
   </footer>
-  <aside class="music-panel" id="music-panel" aria-label="la mejor parte · Yellow de Coldplay" hidden>
-    <div class="music-heading"><span>LA MEJOR PARTE · YELLOW</span><button id="stop-music" type="button" aria-label="Detener música y cerrar reproductor">×</button></div>
-    <div id="music-player"></div>
-    <p>Si no comienza, pulsa ▶. <a href="https://www.youtube.com/watch?v=yKNxeF4KMsY" target="_blank" rel="noopener noreferrer">Abrir en YouTube ↗</a></p>
-  </aside>
+
+  <audio id="song" preload="auto" loop src="assets/la-mejor-parte.mp3"></audio>
   <script src="script.js"></script>
 </body>
 </html>
