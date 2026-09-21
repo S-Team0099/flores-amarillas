@@ -81,29 +81,51 @@
   const toggle = document.getElementById('music-toggle');
   const panel = document.getElementById('music-panel');
   const container = document.getElementById('music-player');
-  function stopMusic() {
-    container.replaceChildren();
-    panel.hidden = true;
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.textContent = '♫ Escuchar Yellow';
-    document.body.classList.remove('music-active');
-    toggle.focus({ preventScroll: true });
-  }
-  toggle.addEventListener('click', () => {
-    if (!panel.hidden) { stopMusic(); return; }
+  const LABEL_IDLE = 'la mejor parte';
+  const LABEL_PLAYING = 'detener música';
+
+  function createPlayer() {
     const player = document.createElement('iframe');
     player.title = 'Coldplay — Yellow (video oficial)';
     player.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
     player.referrerPolicy = 'strict-origin-when-cross-origin';
     player.src = 'https://www.youtube-nocookie.com/embed/yKNxeF4KMsY?autoplay=1&playsinline=1&rel=0';
-    container.appendChild(player);
+    return player;
+  }
+
+  function startMusic() {
+    if (!panel.hidden && container.firstChild) return;
+    container.replaceChildren(createPlayer());
     panel.hidden = false;
     toggle.setAttribute('aria-expanded', 'true');
-    toggle.textContent = '♫ Detener música';
+    toggle.textContent = LABEL_PLAYING;
     document.body.classList.add('music-active');
+  }
+
+  function stopMusic() {
+    container.replaceChildren();
+    panel.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.textContent = LABEL_IDLE;
+    document.body.classList.remove('music-active');
+  }
+
+  toggle.addEventListener('click', () => {
+    if (!panel.hidden) stopMusic();
+    else startMusic();
   });
   document.getElementById('stop-music').addEventListener('click', stopMusic);
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !panel.hidden) stopMusic();
   });
+
+  // Intento de inicio automático; si el navegador bloquea el sonido, el primer toque lo reanuda.
+  startMusic();
+  const unlock = () => {
+    if (panel.hidden) startMusic();
+    document.removeEventListener('pointerdown', unlock);
+    document.removeEventListener('keydown', unlock);
+  };
+  document.addEventListener('pointerdown', unlock, { once: true });
+  document.addEventListener('keydown', unlock, { once: true });
 })();
