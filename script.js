@@ -1,251 +1,45 @@
 (() => {
-  const CONFIG = {
-    para: "Karen Leici",
-    de: "Tu amigo",
-    mensaje: [
-      "Karen, hoy quería regalarte algo que no se marchita en un florero: un jardín solo para ti.",
-      "Gracias por tu risa, por tu compañía y por esa forma tuya de hacer que todo se sienta más liviano. Tu amistad es luz de verdad.",
-      "Que estas flores amarillas te recuerden lo especial que eres para mí. Feliz 21 de septiembre, Karen Leici.",
-    ],
-  };
-
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const welcome = document.getElementById("welcome");
-  const garden = document.getElementById("garden");
-  const note = document.getElementById("note");
-  const bouquet = document.getElementById("bouquet");
-  const petals = document.getElementById("petals");
-  const butterflies = document.getElementById("butterflies");
-  const cardText = document.getElementById("cardText");
-  const soundBtn = document.getElementById("soundBtn");
-  const bloomBtn = document.getElementById("bloomBtn");
-  const noteBtn = document.getElementById("noteBtn");
-  const backGarden = document.getElementById("backGarden");
-  const againBtn = document.getElementById("againBtn");
-
-  document.querySelector(".card__sign").textContent = CONFIG.de;
-
-  let audioCtx = null;
-  let musicOn = false;
-  let musicNodes = null;
-  let typingTimer = null;
-
-  function sunflowerSVG() {
-    return `
-      <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M60 70 C58 110 55 150 52 178" stroke="#2f6d2c" stroke-width="6" fill="none" stroke-linecap="round"/>
-        <path d="M58 120 C40 110 28 118 24 130" fill="#3f8f3a"/>
-        <path d="M62 135 C80 125 92 132 96 146" fill="#3f8f3a"/>
-        <g class="head">
-          ${Array.from({ length: 16 }, (_, i) => {
-            const a = (i * 22.5 * Math.PI) / 180;
-            const x = 60 + Math.cos(a) * 28;
-            const y = 58 + Math.sin(a) * 28;
-            return `<ellipse cx="${x}" cy="${y}" rx="10" ry="22" fill="${i % 2 ? "#ffd54a" : "#f5b820"}" transform="rotate(${i * 22.5} ${x} ${y})" />`;
-          }).join("")}
-          <circle cx="60" cy="58" r="18" fill="#6b3b12"/>
-          <circle cx="60" cy="58" r="14" fill="#8a4f1d"/>
-          ${Array.from({ length: 18 }, () => {
-            const ang = Math.random() * Math.PI * 2;
-            const r = Math.random() * 10;
-            return `<circle cx="${60 + Math.cos(ang) * r}" cy="${58 + Math.sin(ang) * r}" r="1.2" fill="#5a3010"/>`;
-          }).join("")}
-        </g>
-      </svg>`;
+  const ns = 'http://www.w3.org/2000/svg';
+  const stems = document.getElementById('botanical-stems');
+  const heads = document.getElementById('botanical-heads');
+  function element(tag, attrs, parent) {
+    const node = document.createElementNS(ns, tag);
+    Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
+    parent.appendChild(node);
+    return node;
   }
-
-  function plantGarden() {
-    bouquet.innerHTML = "";
-    const layout = [
-      { left: "8%", size: 92, delay: 0.05, z: 2 },
-      { left: "22%", size: 120, delay: 0.18, z: 4 },
-      { left: "38%", size: 150, delay: 0.28, z: 6 },
-      { left: "52%", size: 135, delay: 0.15, z: 5 },
-      { left: "68%", size: 112, delay: 0.32, z: 3 },
-      { left: "82%", size: 98, delay: 0.22, z: 2 },
-      { left: "30%", size: 88, delay: 0.4, z: 1 },
-      { left: "60%", size: 95, delay: 0.45, z: 1 },
-    ];
-
-    layout.forEach((item, index) => {
-      const el = document.createElement("div");
-      el.className = "sunflower";
-      el.style.left = item.left;
-      el.style.setProperty("--size", `${item.size}px`);
-      el.style.zIndex = String(item.z);
-      el.style.bottom = `${(index % 3) * 4}%`;
-      el.innerHTML = sunflowerSVG();
-      bouquet.appendChild(el);
-      requestAnimationFrame(() => {
-        setTimeout(() => el.classList.add("is-grown"), item.delay * 1000);
-      });
-    });
-  }
-
-  function spawnPetals() {
-    if (reduced) return;
-    petals.innerHTML = "";
-    const count = window.innerWidth < 700 ? 14 : 24;
-    for (let i = 0; i < count; i += 1) {
-      const p = document.createElement("span");
-      p.className = "petal-bit";
-      p.style.left = `${Math.random() * 100}%`;
-      p.style.animationDuration = `${7 + Math.random() * 9}s`;
-      p.style.animationDelay = `${Math.random() * 6}s`;
-      p.style.width = `${9 + Math.random() * 10}px`;
-      p.style.height = `${12 + Math.random() * 12}px`;
-      petals.appendChild(p);
-    }
-  }
-
-  function spawnButterflies() {
-    if (reduced) return;
-    butterflies.innerHTML = "";
-    ["🦋", "🦋", "🐝"].forEach((glyph, i) => {
-      const b = document.createElement("span");
-      b.className = "butterfly";
-      b.textContent = glyph;
-      b.style.left = `${15 + i * 28}%`;
-      b.style.top = `${28 + i * 8}%`;
-      b.style.animationDelay = `${i * 1.4}s`;
-      b.style.animationDuration = `${8 + i * 2}s`;
-      butterflies.appendChild(b);
-    });
-  }
-
-  function show(stage) {
-    [welcome, garden, note].forEach((el) => {
-      const on = el === stage;
-      el.hidden = !on;
-      el.classList.toggle("is-on", on);
-    });
-    document.body.classList.toggle("is-garden", stage === garden || stage === note);
-  }
-
-  function typeMessage() {
-    cardText.innerHTML = "";
-    cardText.classList.add("typing");
-    clearInterval(typingTimer);
-
-    if (reduced) {
-      CONFIG.mensaje.forEach((t) => {
-        const p = document.createElement("p");
-        p.textContent = t;
-        cardText.appendChild(p);
-      });
-      cardText.classList.remove("typing");
-      return;
-    }
-
-    let pi = 0;
-    let ci = 0;
-    let p = document.createElement("p");
-    cardText.appendChild(p);
-
-    typingTimer = setInterval(() => {
-      const text = CONFIG.mensaje[pi];
-      p.textContent = text.slice(0, ci + 1);
-      ci += 1;
-      if (ci >= text.length) {
-        pi += 1;
-        ci = 0;
-        if (pi >= CONFIG.mensaje.length) {
-          clearInterval(typingTimer);
-          cardText.classList.remove("typing");
-          return;
-        }
-        p = document.createElement("p");
-        cardText.appendChild(p);
+  const flowers = [
+    { x: 156, y: 287, r: 48, angle: -22 },
+    { x: 377, y: 290, r: 55, angle: 18 },
+    { x: 229, y: 192, r: 58, angle: -12 },
+    { x: 325, y: 153, r: 44, angle: 16 },
+    { x: 278, y: 335, r: 60, angle: 4 },
+  ];
+  // Each bloom uses layered, tapered petals and a deterministic seed pattern.
+  flowers.forEach(({ x, y, r, angle }, index) => {
+    element('path', { d: `M ${270 + index * 5} 570 Q ${x + 25} 423 ${x} ${y}`, fill: 'none', stroke: '#667653', 'stroke-width': 3.4, 'stroke-linecap': 'round' }, stems);
+    const group = element('g', { transform: `translate(${x} ${y}) rotate(${angle})` }, heads);
+    const bloom = element('g', { class: 'flower-head', style: `animation-delay:-${index}s` }, group);
+    [0, 1].forEach(layer => {
+      for (let i = 0; i < 15; i++) {
+        const length = r * (layer ? .86 : 1.04);
+        element('path', { d: `M -5 -10 C ${-r * .38} ${-r * .54} ${-r * .24} ${-length} 0 ${-length} C ${r * .22} ${-length * .93} ${r * .28} ${-r * .45} 5 -10 Z`, fill: 'url(#petal)', stroke: '#b28b32', 'stroke-width': '.55', transform: `rotate(${i * 24 + layer * 12})`, opacity: layer ? 1 : .86 }, bloom);
+        element('path', { d: `M 0 -15 Q -3 ${-length * .58} 0 ${-length * .89}`, fill: 'none', stroke: '#9c752d', 'stroke-width': '.5', opacity: '.4', transform: `rotate(${i * 24 + layer * 12})` }, bloom);
       }
-    }, 18);
-  }
-
-  function ensureAudio() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    return audioCtx;
-  }
-
-  function startMusic() {
-    const ctx = ensureAudio();
-    if (ctx.state === "suspended") ctx.resume();
-    if (musicNodes) return;
-    musicOn = true;
-    soundBtn.setAttribute("aria-pressed", "true");
-
-    const master = ctx.createGain();
-    master.gain.value = 0.04;
-    master.connect(ctx.destination);
-
-    const notes = [261.63, 329.63, 392.0, 523.25];
-    const oscillators = notes.map((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = "sine";
-      osc.frequency.value = freq;
-      gain.gain.value = 0.12 / notes.length;
-      const lfo = ctx.createOscillator();
-      const lfoGain = ctx.createGain();
-      lfo.frequency.value = 0.04 + i * 0.015;
-      lfoGain.gain.value = 0.03;
-      lfo.connect(lfoGain);
-      lfoGain.connect(gain.gain);
-      osc.connect(gain);
-      gain.connect(master);
-      osc.start();
-      lfo.start();
-      return { osc, lfo };
     });
-    musicNodes = { master, oscillators };
-  }
-
-  function stopMusic() {
-    musicOn = false;
-    soundBtn.setAttribute("aria-pressed", "false");
-    if (!musicNodes || !audioCtx) return;
-    musicNodes.master.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.35);
-    setTimeout(() => {
-      if (!musicNodes) return;
-      musicNodes.oscillators.forEach(({ osc, lfo }) => {
-        try {
-          osc.stop();
-          lfo.stop();
-        } catch (_) {}
-      });
-      musicNodes = null;
-    }, 400);
-  }
-
-  bloomBtn.addEventListener("click", () => {
-    show(garden);
-    plantGarden();
-    spawnPetals();
-    spawnButterflies();
-    startMusic();
+    element('circle', { r: r * .29, fill: 'url(#heart)' }, bloom);
+    for (let i = 0; i < 90; i++) {
+      const a = i * 2.399963, distance = Math.sqrt(i / 90) * r * .255;
+      element('circle', { cx: Math.cos(a) * distance, cy: Math.sin(a) * distance, r: .85, fill: i % 3 ? '#b49a55' : '#d3b86c', opacity: '.8' }, bloom);
+    }
   });
-
-  noteBtn.addEventListener("click", () => {
-    show(note);
-    typeMessage();
+  [
+    [267, 509, -58, 87], [282, 483, 47, 90], [236, 448, -65, 83],
+    [316, 426, 52, 78], [214, 381, -64, 64], [328, 367, 39, 59],
+    [263, 404, -23, 68], [252, 308, -53, 61], [310, 270, 38, 63],
+  ].forEach(([x, y, angle, size]) => {
+    const leaf = element('g', { transform: `translate(${x} ${y}) rotate(${angle})` }, stems);
+    element('path', { d: `M 0 0 C ${-size * .45} ${-size * .35} -12 ${-size * .85} 0 ${-size} C ${size * .36} ${-size * .65} ${size * .26} ${-size * .18} 0 0`, fill: 'url(#leaf)', opacity: '.92' }, leaf);
+    element('path', { d: `M 0 0 Q 3 ${-size * .4} 0 ${-size * .9}`, fill: 'none', stroke: '#b2b994', 'stroke-width': '.8' }, leaf);
   });
-
-  backGarden.addEventListener("click", () => {
-    clearInterval(typingTimer);
-    show(garden);
-  });
-
-  againBtn.addEventListener("click", () => {
-    clearInterval(typingTimer);
-    bouquet.innerHTML = "";
-    petals.innerHTML = "";
-    butterflies.innerHTML = "";
-    stopMusic();
-    show(welcome);
-  });
-
-  soundBtn.addEventListener("click", () => {
-    if (musicOn) stopMusic();
-    else startMusic();
-  });
-
-  show(welcome);
 })();

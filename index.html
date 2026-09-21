@@ -1,87 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Para Karen Leici · Flores Amarillas</title>
-    <meta
-      name="description"
-      content="Un jardín de flores amarillas dedicado a Karen Leici, con cariño de amistad."
-    />
-    <meta name="theme-color" content="#f6c84c" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="sky" aria-hidden="true">
-      <div class="sun"></div>
-      <div class="cloud c1"></div>
-      <div class="cloud c2"></div>
-      <div class="cloud c3"></div>
-    </div>
-
-    <div class="petals" id="petals" aria-hidden="true"></div>
-    <div class="butterflies" id="butterflies" aria-hidden="true"></div>
-
-    <header class="topbar">
-      <p class="topbar__date">21 · septiembre</p>
-      <button class="sound" id="soundBtn" type="button" aria-pressed="false">♪ Sonido</button>
-    </header>
-
-    <!-- Pantalla 1: bienvenida -->
-    <main class="stage stage--welcome is-on" id="welcome">
-      <p class="eyebrow">Una dedicatoria especial</p>
-      <h1 class="hero-name">
-        <span>Karen</span>
-        <span>Leici</span>
-      </h1>
-      <p class="tagline">Hoy el sol floreció pensando en ti.</p>
-      <button class="cta" id="bloomBtn" type="button">
-        Abrir tu jardín
-        <span aria-hidden="true">→</span>
-      </button>
-    </main>
-
-    <!-- Pantalla 2: jardín -->
-    <section class="stage stage--garden" id="garden" hidden>
-      <div class="meadow" aria-hidden="true">
-        <div class="hill hill-a"></div>
-        <div class="hill hill-b"></div>
-        <div class="hill hill-c"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2e9">
+  <meta name="description" content="Flores amarillas y buenos deseos para Karen Leici. Un detalle para celebrar la amistad este 21 de septiembre.">
+  <title>Un detalle de amistad · Para Karen Leici</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Volver al inicio"><span class="brand-flower" aria-hidden="true">✳</span> Un pequeño detalle</a>
+    <span class="date">21 <span>/</span> SEPTIEMBRE</span>
+  </header>
+  <main id="inicio">
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> PARA KAREN LEICI</p>
+        <h1 id="title">Hay amistades<br>que hacen los días<br><em>más bonitos.</em></h1>
+        <p class="intro">Y la tuya es una de ellas. Hoy, unas flores amarillas y un deseo sencillo: que tengas muchas razones para sonreír.</p>
+        <a class="button" href="#carta">Un mensaje para ti <span aria-hidden="true">↗</span></a>
+        <p class="hero-caption">Un detalle para celebrar nuestra amistad.</p>
       </div>
-
-      <div class="bouquet" id="bouquet" aria-hidden="true">
-        <!-- Flores SVG se inyectan por JS -->
-      </div>
-
-      <div class="garden-copy">
-        <p class="eyebrow eyebrow--dark">Para ti</p>
-        <h2 class="garden-title">Feliz Día de las Flores Amarillas</h2>
-        <p class="garden-lead">Karen, tu amistad es de esas que iluminan de verdad.</p>
-        <button class="cta cta--ink" id="noteBtn" type="button">Leer tu mensaje</button>
-      </div>
+      <figure class="botanical">
+        <div class="art-frame"><div class="art-number">N.º 21 <span>SEPTIEMBRE</span></div><svg id="flowers" viewBox="0 0 560 640" role="img" aria-labelledby="flowers-title"><title id="flowers-title">Ilustración botánica de flores amarillas con tallos y hojas de olivo</title><defs><linearGradient id="petal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5dd80"/><stop offset=".55" stop-color="#dcb33e"/><stop offset="1" stop-color="#b88726"/></linearGradient><linearGradient id="leaf"><stop stop-color="#788568"/><stop offset="1" stop-color="#394b39"/></linearGradient><radialGradient id="heart"><stop stop-color="#7b6540"/><stop offset="1" stop-color="#443c29"/></radialGradient></defs><g id="botanical-stems"></g><g id="botanical-heads"></g></svg><span class="art-label">Un poquito de alegría, en amarillo.</span></div>
+        <figcaption><span>FLORES QUE DICEN GRACIAS</span><span>por tu amistad.</span></figcaption>
+      </figure>
     </section>
-
-    <!-- Pantalla 3: mensaje -->
-    <section class="stage stage--note" id="note" hidden>
-      <article class="card">
-        <p class="card__stamp">🌻 Para Karen Leici</p>
-        <h2 class="card__title">Gracias por ser mi amiga</h2>
-        <div class="card__text" id="cardText"></div>
-        <p class="card__bye">Con mucho cariño,</p>
-        <p class="card__sign">Tu amigo</p>
-        <div class="card__row">
-          <button class="cta cta--ghost" id="backGarden" type="button">Volver al jardín</button>
-          <button class="cta cta--ink" id="againBtn" type="button">Empezar de nuevo</button>
-        </div>
-      </article>
+    <div class="divider"><span>BUENOS MOMENTOS</span><span aria-hidden="true">✳</span><span>BUENAS AMISTADES</span><span aria-hidden="true">✳</span><span>NUEVOS COMIENZOS</span></div>
+    <section class="letter-section" id="carta" aria-labelledby="letter-title">
+      <div class="letter-aside"><p class="eyebrow">UNAS PALABRAS PARA TI</p><h2>Las cosas sencillas<br>también <em>alegran.</em></h2><p>Una conversación, una buena risa<br>o un detalle inesperado.</p><span class="aside-flower" aria-hidden="true">✳</span></div>
+      <article class="letter"><span class="letter-date">21 de septiembre</span><h3 id="letter-title">Karen,</h3><p>Hoy no podían faltar tus flores amarillas. Este es un pequeño detalle para desearte un bonito día y darte las gracias por tu amistad.</p><p>Gracias por las conversaciones, las risas y los buenos momentos compartidos. Qué bueno contar con una amiga como tú.</p><p>Ojalá esta nueva temporada venga con buenas noticias, nuevos planes y muchas cosas que te hagan feliz.</p><p class="letter-wish">¡Feliz día de las flores amarillas!</p><div class="signature"><span>Con aprecio,</span><strong>Tu amigo</strong><span class="signature-mark" aria-hidden="true">✳</span></div></article>
     </section>
-
-    <script src="script.js"></script>
-  </body>
+    <section class="closing"><p class="eyebrow">QUE NO FALTEN</p><p>Flores, buenos días<br>y <em>buenos amigos.</em></p><a href="#inicio">Volver al inicio <span aria-hidden="true">↑</span></a></section>
+  </main>
+  <footer><span>Para Karen Leici · Un detalle de amistad</span><span>21 de septiembre <span aria-hidden="true">✳</span></span></footer>
+  <script src="script.js"></script>
+</body>
 </html>

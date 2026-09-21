@@ -1,7 +1,11 @@
 # Para Karen Leici · Flores Amarillas
 
-Jardín digital dedicado a **Karen Leici**: cielo de atardecer, girasoles SVG que crecen, pétalos, mariposas y una carta de amistad.
+Un detalle de amistad para el 21 de septiembre. Diseño botánico en marfil, oliva y amarillo, con ilustración SVG propia y una carta para Karen.
 
-## Ver
+Sitio estático sin dependencias de compilación. Abrir `index.html` o servir la carpeta con `python -m http.server 8080`.
+
+Incluye diseño adaptable, navegación por teclado y respeto por la preferencia de movimiento reducido. Las fuentes de Google son opcionales: hay fuentes de respaldo locales.
+
+## Sitio
 
 https://s-team0099.github.io/flores-amarillas/
