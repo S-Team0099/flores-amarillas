@@ -1,11 +1,7 @@
-# Flores Amarillas — Galaxia
+# Para Karen Leici · Flores Amarillas
 
-Dedicatoria inmersiva inspirada en el estilo “galaxia / corazón de flores”: cielo de estrellas, corazón dorado de partículas, flores flotantes, carta con efecto máquina de escribir y ambiente musical generado.
+Jardín digital dedicado a **Karen Leici**: cielo de atardecer, girasoles SVG que crecen, pétalos, mariposas y una carta de amistad.
 
-## Ver en local
-
-Abre `index.html` en el navegador.
-
-## En la web
+## Ver
 
 https://s-team0099.github.io/flores-amarillas/

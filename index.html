@@ -2,67 +2,82 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <title>Para mi amiga · Flores Amarillas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para Karen Leici · Flores Amarillas</title>
     <meta
       name="description"
-      content="Una dedicación especial de flores amarillas para una gran amiga: carta, galaxia y corazón de luz."
+      content="Un jardín de flores amarillas dedicado a Karen Leici, con cariño de amistad."
     />
-    <meta name="theme-color" content="#05040c" />
+    <meta name="theme-color" content="#f6c84c" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Syne:wght@500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Figtree:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <canvas id="galaxy" aria-hidden="true"></canvas>
-    <div class="glow" aria-hidden="true"></div>
-    <div class="flowers" id="flowers" aria-hidden="true"></div>
+    <div class="sky" aria-hidden="true">
+      <div class="sun"></div>
+      <div class="cloud c1"></div>
+      <div class="cloud c2"></div>
+      <div class="cloud c3"></div>
+    </div>
 
-    <button class="sound" id="soundBtn" type="button" aria-pressed="false" title="Música">
-      <span class="sound__icon" aria-hidden="true">♪</span>
-      <span class="sound__label">Música</span>
-    </button>
+    <div class="petals" id="petals" aria-hidden="true"></div>
+    <div class="butterflies" id="butterflies" aria-hidden="true"></div>
 
-    <!-- 1. Sobre -->
-    <section class="scene scene--envelope is-active" id="sceneEnvelope" data-scene="envelope">
-      <button class="envelope" id="envelopeBtn" type="button" aria-label="Abrir la carta">
-        <span class="envelope__stamp" aria-hidden="true">🌻</span>
-        <span class="envelope__meta">PARA</span>
-        <span class="envelope__name" id="toName">Mi amiga</span>
-        <span class="envelope__meta envelope__meta--from">DE</span>
-        <span class="envelope__from" id="fromName">Tu amigo</span>
-        <span class="envelope__wax" aria-hidden="true">❀</span>
+    <header class="topbar">
+      <p class="topbar__date">21 · septiembre</p>
+      <button class="sound" id="soundBtn" type="button" aria-pressed="false">♪ Sonido</button>
+    </header>
+
+    <!-- Pantalla 1: bienvenida -->
+    <main class="stage stage--welcome is-on" id="welcome">
+      <p class="eyebrow">Una dedicatoria especial</p>
+      <h1 class="hero-name">
+        <span>Karen</span>
+        <span>Leici</span>
+      </h1>
+      <p class="tagline">Hoy el sol floreció pensando en ti.</p>
+      <button class="cta" id="bloomBtn" type="button">
+        Abrir tu jardín
+        <span aria-hidden="true">→</span>
       </button>
-      <p class="hint">Toca la carta para abrirla</p>
-    </section>
+    </main>
 
-    <!-- 2. Galaxia / corazón -->
-    <section class="scene scene--heart" id="sceneHeart" data-scene="heart" hidden>
-      <div class="heart-title">
-        <p class="scene__kicker">21 de septiembre</p>
-        <h1 class="scene__headline">Feliz Día de las<br />Flores Amarillas</h1>
-        <p class="scene__lead">
-          Para ti, que iluminas mis días con tu amistad.
-        </p>
-        <button class="btn" id="letterBtn" type="button">Leer tu carta</button>
+    <!-- Pantalla 2: jardín -->
+    <section class="stage stage--garden" id="garden" hidden>
+      <div class="meadow" aria-hidden="true">
+        <div class="hill hill-a"></div>
+        <div class="hill hill-b"></div>
+        <div class="hill hill-c"></div>
+      </div>
+
+      <div class="bouquet" id="bouquet" aria-hidden="true">
+        <!-- Flores SVG se inyectan por JS -->
+      </div>
+
+      <div class="garden-copy">
+        <p class="eyebrow eyebrow--dark">Para ti</p>
+        <h2 class="garden-title">Feliz Día de las Flores Amarillas</h2>
+        <p class="garden-lead">Karen, tu amistad es de esas que iluminan de verdad.</p>
+        <button class="cta cta--ink" id="noteBtn" type="button">Leer tu mensaje</button>
       </div>
     </section>
 
-    <!-- 3. Carta -->
-    <section class="scene scene--letter" id="sceneLetter" data-scene="letter" hidden>
-      <article class="letter" role="dialog" aria-labelledby="letterTitle">
-        <div class="letter__seal" aria-hidden="true">❀</div>
-        <h2 class="letter__title" id="letterTitle">Para una gran amiga</h2>
-        <div class="letter__body" id="letterBody"></div>
-        <p class="letter__sign">Con cariño y gratitud,</p>
-        <p class="letter__from" id="letterFrom">Tu amigo</p>
-        <div class="letter__actions">
-          <button class="btn btn--ghost" id="backBtn" type="button">Volver a la galaxia</button>
-          <button class="btn" id="replayBtn" type="button">Ver de nuevo</button>
+    <!-- Pantalla 3: mensaje -->
+    <section class="stage stage--note" id="note" hidden>
+      <article class="card">
+        <p class="card__stamp">🌻 Para Karen Leici</p>
+        <h2 class="card__title">Gracias por ser mi amiga</h2>
+        <div class="card__text" id="cardText"></div>
+        <p class="card__bye">Con mucho cariño,</p>
+        <p class="card__sign">Tu amigo</p>
+        <div class="card__row">
+          <button class="cta cta--ghost" id="backGarden" type="button">Volver al jardín</button>
+          <button class="cta cta--ink" id="againBtn" type="button">Empezar de nuevo</button>
         </div>
       </article>
     </section>
