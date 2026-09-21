@@ -1,13 +1,11 @@
-# Flores Amarillas
+# Flores Amarillas — Galaxia
 
-Página dedicada a las flores amarillas: una dedicación cálida para el 21 de septiembre.
+Dedicatoria inmersiva inspirada en el estilo “galaxia / corazón de flores”: cielo de estrellas, corazón dorado de partículas, flores flotantes, carta con efecto máquina de escribir y ambiente musical generado.
 
 ## Ver en local
 
-Abre `index.html` en el navegador, o sirve la carpeta con cualquier servidor estático.
+Abre `index.html` en el navegador.
 
-## GitHub Pages
+## En la web
 
-Si el repositorio tiene Pages activado en la rama `main` (carpeta raíz), la página quedará disponible en:
-
-`https://<usuario>.github.io/flores-amarillas/`
+https://s-team0099.github.io/flores-amarillas/

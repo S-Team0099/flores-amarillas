@@ -2,52 +2,65 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flores Amarillas — Una dedicación</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>Galaxia · Corazón de Flores Amarillas</title>
     <meta
       name="description"
-      content="Una página dedicada a las flores amarillas: luz, cariño y un mensaje que florece."
+      content="Una dedicación inmersiva: galaxia dorada, corazón de flores amarillas y un mensaje solo para ti."
     />
+    <meta name="theme-color" content="#05040c" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="sky" aria-hidden="true"></div>
-    <div class="petals" aria-hidden="true" id="petals"></div>
+    <canvas id="galaxy" aria-hidden="true"></canvas>
+    <div class="glow" aria-hidden="true"></div>
+    <div class="flowers" id="flowers" aria-hidden="true"></div>
 
-    <main class="hero">
-      <p class="eyebrow animate-in">21 de septiembre</p>
-      <h1 class="brand animate-in delay-1">Flores Amarillas</h1>
-      <p class="lede animate-in delay-2">
-        Para ti, que iluminas mis días como un campo en flor bajo el sol.
-      </p>
-      <a class="cta animate-in delay-3" href="#dedicatoria">Leer dedicación</a>
-    </main>
+    <button class="sound" id="soundBtn" type="button" aria-pressed="false" title="Música">
+      <span class="sound__icon" aria-hidden="true">♪</span>
+      <span class="sound__label">Música</span>
+    </button>
 
-    <section class="dedication" id="dedicatoria">
-      <div class="dedication__inner">
-        <h2 class="dedication__title">Una flor para ti</h2>
-        <p class="dedication__text">
-          Hoy elijo el amarillo porque es el color de la esperanza, de la risa
-          compartida y de las mañanas que empiezan bien solo porque estás.
+    <!-- Intro -->
+    <section class="scene scene--intro is-active" id="sceneIntro" data-scene="intro">
+      <p class="scene__kicker">21 de septiembre</p>
+      <h1 class="scene__brand">Flores Amarillas</h1>
+      <p class="scene__lead">Hay un universo entero esperándote… y un corazón hecho de luz.</p>
+      <button class="btn" id="openBtn" type="button">Abrir dedicación</button>
+    </section>
+
+    <!-- Galaxia / corazón -->
+    <section class="scene scene--heart" id="sceneHeart" data-scene="heart" hidden>
+      <div class="heart-title">
+        <p class="scene__kicker">Para ti</p>
+        <h2 class="scene__headline">Feliz Día de las<br />Flores Amarillas</h2>
+        <p class="scene__lead scene__lead--narrow">
+          Cada pétalo es un pensamiento. Cada estrella, un deseo.
         </p>
-        <p class="dedication__text">
-          Que estas flores te recuerden lo mucho que importas: tu luz, tu
-          ternura y esa forma tuya de hacer el mundo más cálido.
-        </p>
-        <p class="dedication__sign">Con cariño,</p>
-        <p class="dedication__from">Alguien que te piensa en amarillo</p>
+        <button class="btn btn--ghost" id="letterBtn" type="button">Leer tu carta</button>
       </div>
     </section>
 
-    <footer class="footer">
-      <p>Hecho con sol y pétalos · Flores Amarillas</p>
-    </footer>
+    <!-- Carta -->
+    <section class="scene scene--letter" id="sceneLetter" data-scene="letter" hidden>
+      <article class="letter" role="dialog" aria-labelledby="letterTitle">
+        <div class="letter__seal" aria-hidden="true">❀</div>
+        <h2 class="letter__title" id="letterTitle">Una flor para ti</h2>
+        <div class="letter__body" id="letterBody"></div>
+        <p class="letter__sign">Con todo el cariño del universo,</p>
+        <p class="letter__from">Quien te dedica este cielo</p>
+        <div class="letter__actions">
+          <button class="btn btn--ghost" id="backBtn" type="button">Volver a la galaxia</button>
+          <button class="btn" id="replayBtn" type="button">Ver de nuevo</button>
+        </div>
+      </article>
+    </section>
 
     <script src="script.js"></script>
   </body>
