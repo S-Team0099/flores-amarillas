@@ -1,27 +1,38 @@
 (() => {
+  /**
+   * Personaliza aquí la dedicación para tu amiga
+   */
+  const CONFIG = {
+    para: "Mi amiga",
+    de: "Tu amigo",
+    carta: [
+      "Hoy no quería enviarte un mensaje cualquiera. Quería darte un pedacito de cielo con flores amarillas… porque así se siente tu amistad: cálida, luminosa y imposible de olvidar.",
+      "Gracias por estar, por reír conmigo, por escucharme y por hacer que los días pesados se sientan más livianos. Contigo la vida tiene más color.",
+      "Que estas flores te recuerden lo especial que eres para mí. Feliz Día de las Flores Amarillas, amiga.",
+    ],
+  };
+
   const canvas = document.getElementById("galaxy");
   const ctx = canvas.getContext("2d", { alpha: false });
   const flowersLayer = document.getElementById("flowers");
   const soundBtn = document.getElementById("soundBtn");
-  const openBtn = document.getElementById("openBtn");
+  const envelopeBtn = document.getElementById("envelopeBtn");
   const letterBtn = document.getElementById("letterBtn");
   const backBtn = document.getElementById("backBtn");
   const replayBtn = document.getElementById("replayBtn");
   const letterBody = document.getElementById("letterBody");
 
+  document.getElementById("toName").textContent = CONFIG.para;
+  document.getElementById("fromName").textContent = CONFIG.de;
+  document.getElementById("letterFrom").textContent = CONFIG.de;
+
   const scenes = {
-    intro: document.getElementById("sceneIntro"),
+    envelope: document.getElementById("sceneEnvelope"),
     heart: document.getElementById("sceneHeart"),
     letter: document.getElementById("sceneLetter"),
   };
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const LETTER_PARAS = [
-    "Hoy elijo el amarillo porque es el color de la esperanza, de la risa compartida y de las mañanas que empiezan bien solo porque estás.",
-    "Que este corazón de flores te recuerde lo mucho que importas: tu luz, tu ternura y esa forma tuya de hacer el mundo más cálido.",
-    "Si alguna vez dudas, mira al cielo… ahí también florece algo que lleva tu nombre.",
-  ];
 
   let width = 0;
   let height = 0;
@@ -52,7 +63,6 @@
   }
 
   function heartPath(t) {
-    // Classic parametric heart
     const x = 16 * Math.pow(Math.sin(t), 3);
     const y =
       -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
@@ -76,8 +86,6 @@
         hue: 42 + Math.random() * 18,
       });
     }
-
-    // Fill interior with soft dust
     for (let i = 0; i < count * 0.45; i += 1) {
       const t = Math.random() * Math.PI * 2;
       const p = heartPath(t);
@@ -184,7 +192,6 @@
     heartProgress = Math.min(1, heartProgress + (reducedMotion ? 1 : 0.0065));
     const visible = Math.floor(heartPoints.length * heartProgress);
 
-    // Soft aura
     const aura = ctx.createRadialGradient(
       width * 0.5,
       height * 0.42,
@@ -214,7 +221,6 @@
     }
     ctx.shadowBlur = 0;
 
-    // Trailing orbit sparks
     if (heartProgress > 0.55) {
       const orbitCount = 18;
       const radius = Math.min(width, height) * 0.22;
@@ -257,7 +263,7 @@
 
     clearInterval(typingTimer);
     if (reducedMotion) {
-      LETTER_PARAS.forEach((text) => {
+      CONFIG.carta.forEach((text) => {
         const p = document.createElement("p");
         p.textContent = text;
         letterBody.appendChild(p);
@@ -267,13 +273,13 @@
     }
 
     typingTimer = setInterval(() => {
-      const text = LETTER_PARAS[paraIndex];
+      const text = CONFIG.carta[paraIndex];
       current.textContent = text.slice(0, charIndex + 1);
       charIndex += 1;
       if (charIndex >= text.length) {
         paraIndex += 1;
         charIndex = 0;
-        if (paraIndex >= LETTER_PARAS.length) {
+        if (paraIndex >= CONFIG.carta.length) {
           clearInterval(typingTimer);
           letterBody.classList.remove("cursor-blink");
           return;
@@ -307,10 +313,9 @@
     opened = false;
     heartProgress = 0;
     flowersLayer.innerHTML = "";
-    showScene("intro");
+    showScene("envelope");
   }
 
-  // Soft generative ambience (no external audio file)
   function ensureAudio() {
     if (!audioCtx) {
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -322,8 +327,8 @@
     if (!fromGesture && !musicOn) return;
     const ctxA = ensureAudio();
     if (ctxA.state === "suspended") ctxA.resume();
-
     if (musicNodes) return;
+
     musicOn = true;
     soundBtn.setAttribute("aria-pressed", "true");
 
@@ -385,7 +390,7 @@
     pointer.ty = (y - 0.5) * 2;
   }
 
-  openBtn.addEventListener("click", openDedication);
+  envelopeBtn.addEventListener("click", openDedication);
   letterBtn.addEventListener("click", openLetter);
   backBtn.addEventListener("click", backToGalaxy);
   replayBtn.addEventListener("click", replay);
@@ -398,8 +403,7 @@
 
   resize();
   spawnParticles();
-  showScene("intro");
+  showScene("envelope");
   raf = requestAnimationFrame(frame);
-
   window.addEventListener("beforeunload", () => cancelAnimationFrame(raf));
 })();

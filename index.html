@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <title>Galaxia · Corazón de Flores Amarillas</title>
+    <title>Para mi amiga · Flores Amarillas</title>
     <meta
       name="description"
-      content="Una dedicación inmersiva: galaxia dorada, corazón de flores amarillas y un mensaje solo para ti."
+      content="Una dedicación especial de flores amarillas para una gran amiga: carta, galaxia y corazón de luz."
     />
     <meta name="theme-color" content="#05040c" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,34 +27,39 @@
       <span class="sound__label">Música</span>
     </button>
 
-    <!-- Intro -->
-    <section class="scene scene--intro is-active" id="sceneIntro" data-scene="intro">
-      <p class="scene__kicker">21 de septiembre</p>
-      <h1 class="scene__brand">Flores Amarillas</h1>
-      <p class="scene__lead">Hay un universo entero esperándote… y un corazón hecho de luz.</p>
-      <button class="btn" id="openBtn" type="button">Abrir dedicación</button>
+    <!-- 1. Sobre -->
+    <section class="scene scene--envelope is-active" id="sceneEnvelope" data-scene="envelope">
+      <button class="envelope" id="envelopeBtn" type="button" aria-label="Abrir la carta">
+        <span class="envelope__stamp" aria-hidden="true">🌻</span>
+        <span class="envelope__meta">PARA</span>
+        <span class="envelope__name" id="toName">Mi amiga</span>
+        <span class="envelope__meta envelope__meta--from">DE</span>
+        <span class="envelope__from" id="fromName">Tu amigo</span>
+        <span class="envelope__wax" aria-hidden="true">❀</span>
+      </button>
+      <p class="hint">Toca la carta para abrirla</p>
     </section>
 
-    <!-- Galaxia / corazón -->
+    <!-- 2. Galaxia / corazón -->
     <section class="scene scene--heart" id="sceneHeart" data-scene="heart" hidden>
       <div class="heart-title">
-        <p class="scene__kicker">Para ti</p>
-        <h2 class="scene__headline">Feliz Día de las<br />Flores Amarillas</h2>
-        <p class="scene__lead scene__lead--narrow">
-          Cada pétalo es un pensamiento. Cada estrella, un deseo.
+        <p class="scene__kicker">21 de septiembre</p>
+        <h1 class="scene__headline">Feliz Día de las<br />Flores Amarillas</h1>
+        <p class="scene__lead">
+          Para ti, que iluminas mis días con tu amistad.
         </p>
-        <button class="btn btn--ghost" id="letterBtn" type="button">Leer tu carta</button>
+        <button class="btn" id="letterBtn" type="button">Leer tu carta</button>
       </div>
     </section>
 
-    <!-- Carta -->
+    <!-- 3. Carta -->
     <section class="scene scene--letter" id="sceneLetter" data-scene="letter" hidden>
       <article class="letter" role="dialog" aria-labelledby="letterTitle">
         <div class="letter__seal" aria-hidden="true">❀</div>
-        <h2 class="letter__title" id="letterTitle">Una flor para ti</h2>
+        <h2 class="letter__title" id="letterTitle">Para una gran amiga</h2>
         <div class="letter__body" id="letterBody"></div>
-        <p class="letter__sign">Con todo el cariño del universo,</p>
-        <p class="letter__from">Quien te dedica este cielo</p>
+        <p class="letter__sign">Con cariño y gratitud,</p>
+        <p class="letter__from" id="letterFrom">Tu amigo</p>
         <div class="letter__actions">
           <button class="btn btn--ghost" id="backBtn" type="button">Volver a la galaxia</button>
           <button class="btn" id="replayBtn" type="button">Ver de nuevo</button>
