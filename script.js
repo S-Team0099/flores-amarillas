@@ -12,50 +12,46 @@
   }
 
   const flowers = [
-    { x: 156, y: 287, r: 48, angle: -22 },
-    { x: 377, y: 290, r: 55, angle: 18 },
-    { x: 229, y: 192, r: 58, angle: -12 },
-    { x: 325, y: 153, r: 44, angle: 16 },
-    { x: 278, y: 335, r: 60, angle: 4 },
+    { x: 280, y: 250, r: 92, angle: -6 },
   ];
 
-  flowers.forEach(({ x, y, r, angle }, index) => {
+  flowers.forEach(({ x, y, r, angle }) => {
     element('path', {
-      d: `M ${270 + index * 5} 570 Q ${x + 25} 423 ${x} ${y}`,
-      fill: 'none', stroke: '#667653', 'stroke-width': 3.4, 'stroke-linecap': 'round',
+      d: `M 280 560 Q 286 420 ${x} ${y + r * 0.35}`,
+      fill: 'none', stroke: '#667653', 'stroke-width': 5, 'stroke-linecap': 'round',
     }, stems);
     const group = element('g', { transform: `translate(${x} ${y}) rotate(${angle})` }, heads);
-    const bloom = element('g', { class: 'flower-head', style: `animation-delay:-${index}s` }, group);
+    const bloom = element('g', { class: 'flower-head' }, group);
     [0, 1].forEach(layer => {
-      for (let i = 0; i < 15; i++) {
-        const length = r * (layer ? 0.86 : 1.04);
+      for (let i = 0; i < 16; i++) {
+        const length = r * (layer ? 0.86 : 1.05);
         element('path', {
           d: `M -5 -10 C ${-r * 0.38} ${-r * 0.54} ${-r * 0.24} ${-length} 0 ${-length} C ${r * 0.22} ${-length * 0.93} ${r * 0.28} ${-r * 0.45} 5 -10 Z`,
           fill: 'url(#petal)', stroke: '#b28b32', 'stroke-width': '.55',
-          transform: `rotate(${i * 24 + layer * 12})`, opacity: layer ? 1 : 0.86,
+          transform: `rotate(${i * 22.5 + layer * 11})`, opacity: layer ? 1 : 0.88,
         }, bloom);
         element('path', {
           d: `M 0 -15 Q -3 ${-length * 0.58} 0 ${-length * 0.89}`,
           fill: 'none', stroke: '#9c752d', 'stroke-width': '.5', opacity: '.4',
-          transform: `rotate(${i * 24 + layer * 12})`,
+          transform: `rotate(${i * 22.5 + layer * 11})`,
         }, bloom);
       }
     });
-    element('circle', { r: r * 0.29, fill: 'url(#heart)' }, bloom);
-    for (let i = 0; i < 90; i++) {
+    element('circle', { r: r * 0.3, fill: 'url(#heart)' }, bloom);
+    for (let i = 0; i < 110; i++) {
       const a = i * 2.399963;
-      const distance = Math.sqrt(i / 90) * r * 0.255;
+      const distance = Math.sqrt(i / 110) * r * 0.26;
       element('circle', {
-        cx: Math.cos(a) * distance, cy: Math.sin(a) * distance, r: 0.85,
-        fill: i % 3 ? '#b49a55' : '#d3b86c', opacity: '.8',
+        cx: Math.cos(a) * distance, cy: Math.sin(a) * distance, r: 1,
+        fill: i % 3 ? '#b49a55' : '#d3b86c', opacity: '.85',
       }, bloom);
     }
   });
 
   [
-    [267, 509, -58, 87], [282, 483, 47, 90], [236, 448, -65, 83],
-    [316, 426, 52, 78], [214, 381, -64, 64], [328, 367, 39, 59],
-    [263, 404, -23, 68], [252, 308, -53, 61], [310, 270, 38, 63],
+    [268, 430, -58, 78],
+    [292, 460, 48, 72],
+    [255, 380, -40, 55],
   ].forEach(([x, y, angle, size]) => {
     const leaf = element('g', { transform: `translate(${x} ${y}) rotate(${angle})` }, stems);
     element('path', {
