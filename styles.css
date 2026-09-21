@@ -83,26 +83,16 @@ a:focus-visible {
 .flower-illu {
   display: block;
   margin-inline: auto;
-  filter: drop-shadow(0 8px 16px #b8872630);
+  overflow: visible;
 }
 .flower-illu--hero {
-  width: min(120px, 32vw);
+  width: min(140px, 38vw);
   height: auto;
-  animation: flower-sway 5s ease-in-out infinite;
-}
-.flower-illu--seal,
-.flower-illu--md,
-.flower-illu--xs {
-  animation: none;
 }
 .envelope-seal {
   background: #fff7dc;
   overflow: hidden;
-  padding: 2px;
-}
-@keyframes flower-sway {
-  0%, 100% { transform: rotate(-3deg); }
-  50% { transform: rotate(3deg); }
+  padding: 4px;
 }
 .art-frame--photo {
   display: none;
@@ -643,7 +633,7 @@ main { flex: 1; width: 100%; }
     margin-bottom: 12px;
   }
   .flower-illu--hero {
-    width: 88px;
+    width: 110px;
   }
   .envelope {
     height: 190px;
@@ -666,39 +656,7 @@ main { flex: 1; width: 100%; }
     padding: 12px;
     gap: 14px;
   }
-  .music-toggle {
-    top: 12px;
-    right: 12px;
-  }
 }
 @media(prefers-reduced-motion:reduce) { .screen,.screen * { animation:none!important; transition:none!important; } }
 
-.music-toggle {
-  position: fixed;
-  z-index: 40;
-  top: max(1rem, env(safe-area-inset-top));
-  right: max(1rem, env(safe-area-inset-right));
-  border: 1px solid #b7bfa7;
-  background: rgba(255, 253, 246, 0.92);
-  backdrop-filter: blur(8px);
-  color: var(--ink);
-  font: 600 10px var(--sans);
-  letter-spacing: 0.04em;
-  text-transform: lowercase;
-  padding: 10px 13px;
-  cursor: pointer;
-}
-.music-toggle:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 4px;
-}
-.music-toggle[aria-pressed="true"] {
-  border-color: var(--gold);
-  background: #fff3c4;
-}
-@media (max-width: 600px) {
-  .music-toggle {
-    font-size: 9px;
-    padding: 9px;
-  }
-}
+.noscript-message { text-align: center; }

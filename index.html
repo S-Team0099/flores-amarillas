@@ -12,14 +12,10 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false">la mejor parte</button>
-
   <main id="experiencia">
     <section class="welcome-screen screen" id="inicio" aria-labelledby="welcome-title">
       <span class="welcome-flower" aria-hidden="true">
-        <svg class="flower-illu flower-illu--hero" viewBox="0 0 120 150" width="120" height="150">
-          <use href="#solo-flower"/>
-        </svg>
+        <svg id="welcome-bloom" class="flower-illu flower-illu--hero" viewBox="0 0 200 240" width="140" height="168"></svg>
       </span>
       <h1 id="welcome-title" tabindex="-1">Un pequeño detalle.<br><em>Una buena amistad.</em></h1>
       <p class="intro">Hoy hay algo bonito esperándote.<br>Unas flores, unas palabras y buenos deseos.</p>
@@ -38,7 +34,7 @@
         <div class="art-frame">
           <div class="art-number">N.º 21 <span>SEPTIEMBRE</span></div>
           <svg id="flowers" viewBox="0 0 560 640" role="img" aria-labelledby="flowers-title">
-            <title id="flowers-title">Ilustración de una flor amarilla</title>
+            <title id="flowers-title">Ilustración botánica de flores amarillas</title>
             <defs>
               <linearGradient id="petal" x1="0" y1="0" x2="1" y2="1">
                 <stop stop-color="#f5dd80"/><stop offset=".55" stop-color="#dcb33e"/><stop offset="1" stop-color="#b88726"/>
@@ -62,7 +58,7 @@
         <span class="envelope-paper"><span>Con aprecio</span></span>
         <span class="envelope-front"></span><span class="envelope-flap"></span>
         <span class="envelope-seal" aria-hidden="true">
-          <svg class="flower-illu flower-illu--seal" viewBox="0 0 120 150" width="34" height="42"><use href="#solo-flower"/></svg>
+          <svg id="seal-bloom" class="flower-illu flower-illu--seal" viewBox="0 0 120 120" width="36" height="36"></svg>
         </span>
       </button>
       <p class="envelope-hint">Toca el sello para abrir tu carta</p>
@@ -75,7 +71,7 @@
         <h2>Las cosas sencillas<br>también <em>alegran.</em></h2>
         <p>Una conversación, una buena risa<br>o un detalle inesperado.</p>
         <span class="aside-flower" aria-hidden="true">
-          <svg class="flower-illu flower-illu--md" viewBox="0 0 120 150" width="72" height="90"><use href="#solo-flower"/></svg>
+          <svg id="aside-bloom" class="flower-illu flower-illu--md" viewBox="0 0 160 200" width="80" height="100"></svg>
         </span>
       </div>
       <article class="letter">
@@ -88,7 +84,7 @@
         <div class="signature">
           <span>Con aprecio,</span>
           <span class="signature-mark" aria-hidden="true">
-            <svg class="flower-illu flower-illu--xs" viewBox="0 0 120 150" width="26" height="32"><use href="#solo-flower"/></svg>
+            <svg id="sign-bloom" class="flower-illu flower-illu--xs" viewBox="0 0 80 80" width="28" height="28"></svg>
           </span>
         </div>
         <a class="text-link letter-next" href="#final">Un último deseo →</a>
@@ -116,39 +112,6 @@
   </footer>
 
   <audio id="song" preload="auto" loop src="assets/la-mejor-parte.mp3"></audio>
-
-  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
-    <symbol id="solo-flower" viewBox="0 0 120 150">
-      <path d="M60 62 C58 95 56 125 54 148" fill="none" stroke="#4f6b3f" stroke-width="5" stroke-linecap="round"/>
-      <path d="M58 108 C38 98 26 104 22 118" fill="#5f8148"/>
-      <path d="M62 118 C82 108 94 116 98 130" fill="#5f8148"/>
-      <g transform="translate(60 58)">
-        <g>
-          <ellipse cx="0" cy="-34" rx="9" ry="22" fill="#f0c14a"/>
-          <ellipse cx="0" cy="-34" rx="9" ry="22" fill="#f0c14a" transform="rotate(30)"/>
-          <ellipse cx="0" cy="-34" rx="9" ry="22" fill="#e4ae30" transform="rotate(60)"/>
-          <ellipse cx="0" cy="-34" rx="9" ry="22" fill="#f0c14a" transform="rotate(90)"/>
-          <ellipse cx="0" cy="-34" rx="9" ry="22" fill="#e4ae30" transform="rotate(120)"/>
-          <ellipse cx="0" cy="-34" rx="9" ry="22" fill="#f0c14a" transform="rotate(150)"/>
-          <ellipse cx="0" cy="-34" rx="9" ry="22" fill="#e4ae30" transform="rotate(180)"/>
-          <ellipse cx="0" cy="-34" rx="9" ry="22" fill="#f0c14a" transform="rotate(210)"/>
-          <ellipse cx="0" cy="-34" rx="9" ry="22" fill="#e4ae30" transform="rotate(240)"/>
-          <ellipse cx="0" cy="-34" rx="9" ry="22" fill="#f0c14a" transform="rotate(270)"/>
-          <ellipse cx="0" cy="-34" rx="9" ry="22" fill="#e4ae30" transform="rotate(300)"/>
-          <ellipse cx="0" cy="-34" rx="9" ry="22" fill="#f0c14a" transform="rotate(330)"/>
-        </g>
-        <circle r="16" fill="#6b4724"/>
-        <circle r="12" fill="#7a5228"/>
-        <circle cx="-4" cy="-3" r="1.2" fill="#3f2a14"/>
-        <circle cx="3" cy="-5" r="1.1" fill="#3f2a14"/>
-        <circle cx="5" cy="2" r="1.1" fill="#3f2a14"/>
-        <circle cx="-2" cy="5" r="1.2" fill="#3f2a14"/>
-        <circle cx="0" cy="0" r="1" fill="#3f2a14"/>
-        <circle cx="-6" cy="2" r=".9" fill="#3f2a14"/>
-        <circle cx="6" cy="-2" r=".9" fill="#3f2a14"/>
-      </g>
-    </symbol>
-  </svg>
   <script src="script.js"></script>
 </body>
 </html>
